@@ -6,7 +6,7 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 22:51:42 by fbabin            #+#    #+#              #
-#    Updated: 2018/04/18 19:04:42 by fbabin           ###   ########.fr        #
+#    Updated: 2018/04/18 23:11:16 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FDF				=	fdf
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
 
-_SRCS			=	fdf.c \
+_SRCS			=	fdf.c get_coords.c \
 
 _LIBFT			=	libft.a
 HEADER_DIR		=	includes
@@ -46,7 +46,7 @@ $(LIBFT):
 		@make -C $(LIB_DIR)
 
 %.o : %.c
-		@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_DIR)
+		@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_DIR) -I libft/includes
 
 clean:
 		@make fclean -C $(LIB_DIR)
