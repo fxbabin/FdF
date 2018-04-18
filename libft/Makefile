@@ -6,7 +6,7 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 17:49:24 by fbabin            #+#    #+#              #
-#    Updated: 2018/04/16 22:26:36 by fbabin           ###   ########.fr        #
+#    Updated: 2018/04/18 19:45:40 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,8 @@ _IO				=	ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 					ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 					ft_putnbr_fd.c get_next_line.c sget_next_line.c \
 
-_PRINTF			=	ft_printf.c padding.c xtract.c handler_wc.c handler_ws.c \
-					handler_num.c handler_fnk.c \
+_FT_PRINTF		=	ft_printf.c ft_sprintf.c padding.c xtract.c handler_wc.c \
+					handler_ws.c handler_num.c handler_fnk.c \
 
 MEM_DIR			=	srcs/mem
 STR_DIR			=	srcs/str
