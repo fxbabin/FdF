@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/19 16:06:04 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/04/19 19:58:05 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_printf.h"
 # include "io.h"
 # include "lst.h"
+# include "array.h"
 
 # define WIDTH 1920
 # define HEIGHT 1380

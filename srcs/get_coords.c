@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/19 17:25:44 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/04/19 22:31:11 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,21 @@ static int		ft_wordnb(char *str, char *charset)
 	return (w);
 }
 
-int			extract_coords(t_env *env, t_list *lst)
+int			extract_coords(t_env *env, t_list *lst, int nb_words)
 {
 	char		**tmp;
 	t_list		*l;
 
 	l = lst;
 	(void)env;
+	if (!(env->coords = (int**)malloc(((ft_lstsize(lst) * nb_words) + 1) * sizeof(int*))))
+		return (-1);
 	while (lst)
 	{
-		if (!(tmp = ft_split()))
+		if (!(tmp = ft_split(lst->content, " \t")))
 			return (-1);
-		ft_printf("%s\n", lst->content);
+		ft_char2dump(tmp);
+		ft_free2((void**)tmp);
 		lst = lst->next;
 	}
 	return (0);
