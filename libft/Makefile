@@ -6,14 +6,14 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 17:49:24 by fbabin            #+#    #+#              #
-#    Updated: 2018/04/18 19:45:40 by fbabin           ###   ########.fr        #
+#    Updated: 2018/06/19 16:50:46 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	libft.a
 
 CC				=	gcc
-FLAGS			=	-Wall -Werror -Wextra
+FLAGS			=	-Wall -Werror -Wextra -Ofast
 
 _MEM			=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 					ft_memmove.c ft_memchr.c ft_memcmp.c \
@@ -59,7 +59,7 @@ _IO				=	ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 					ft_putnbr_fd.c get_next_line.c sget_next_line.c \
 
 _FT_PRINTF		=	ft_printf.c ft_sprintf.c padding.c xtract.c handler_wc.c \
-					handler_ws.c handler_num.c handler_fnk.c \
+					handler_ws.c handler_num.c handler_fnk.c utils.c \
 
 MEM_DIR			=	srcs/mem
 STR_DIR			=	srcs/str
