@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 00:50:15 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/16 00:56:14 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/04 19:16:59 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void				ft_strquicksort(char **array, int left, int right);
 void				ft_mergesort(int **array, int left, int right);
 void				ft_strmergesort(char **array, int left, int right);
 void				ft_char2dump(char **array);
-void				ft_int2dump(int **array);
+void				ft_int2dump(int **array, int nb_perline, int max);
 
 #endif

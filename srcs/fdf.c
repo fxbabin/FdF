@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/19 16:09:09 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/04 21:09:05 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int		main(int argc, char **argv)
 	t_env		*env;
 
 	env = init_env();
-	if (!check_file_opening(env, argc, argv))
+	if (!env || !check_file_opening(env, argc, argv))
 		return (-1);
 	if (!get_coords(env))
 		return (-1);
-	mlx_key_hook(env->win_ptr, deal_key, env);
-	mlx_loop(env->mlx_ptr);
+	//mlx_key_hook(env->win_ptr, deal_key, env);
+	//mlx_loop(env->mlx_ptr);
 	return (0);
 }

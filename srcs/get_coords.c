@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/19 22:31:11 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/05 03:29:40 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,42 @@ int			extract_coords(t_env *env, t_list *lst, int nb_words)
 {
 	char		**tmp;
 	t_list		*l;
+	int			y;
+	int			i;
 
 	l = lst;
+	y = 0;
 	(void)env;
-	if (!(env->coords = (int**)malloc(((ft_lstsize(lst) * nb_words) + 1) * sizeof(int*))))
+	if (!(env->coords = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
 		return (-1);
 	while (lst)
 	{
+		//ft_printf("1\n");
 		if (!(tmp = ft_split(lst->content, " \t")))
 			return (-1);
-		ft_char2dump(tmp);
+		//ft_char2dump(tmp);
+		i = -1;
+		while (tmp[++i])
+		{
+			*(env->coords[(y * nb_words) + i]) = ft_atoi(tmp[i]);
+			//ft_printf("%d\n", );
+		}
+		y++;
 		ft_free2((void**)tmp);
 		lst = lst->next;
 	}
 	return (0);
+}
+
+void	ff(int **tab)
+{
+	int		i;
+
+	i = -1;
+	while (tab[++i])
+	{
+		ft_printf("%d\n", *tab[i]);
+	}
 }
 
 int			get_coords(t_env *env)
@@ -97,8 +119,9 @@ int			get_coords(t_env *env)
 		ft_lstpushback(&tmp, ft_strdup(line), 0);
 		ft_strdel(&line);
 	}
-	ft_lstdump(&tmp);
+	//ft_lstdump(&tmp);
 	ft_strdel(&line);
-	extract_coords(env, tmp);
+	extract_coords(env, tmp, nb_words);
+	ft_int22dump(env->coords, nb_words, 50);
 	return (1);
 }

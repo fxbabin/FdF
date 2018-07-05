@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/19 19:58:05 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/05 02:27:27 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ typedef struct		s_dot
  */
 
 int				get_coords(t_env *env);
-
+void			ft_int22dump(int **array, int perline, int max);
 #endif
