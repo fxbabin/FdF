@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/05 03:29:40 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/07 01:32:43 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ int				ft_is_word_nb(char *str)
 	return (1);
 }
 
-/*int				ft_is_word_nb(char *str, char *charset)
-{
-	int		i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (!ft_charinset(str[i], charset))
-			return (0);
-	}
-	return (1);
-}*/
 static int		ft_wordnb(char *str, char *charset)
 {
 	int     w;
@@ -65,16 +53,11 @@ int			extract_coords(t_env *env, t_list *lst, int nb_words)
 		return (-1);
 	while (lst)
 	{
-		//ft_printf("1\n");
 		if (!(tmp = ft_split(lst->content, " \t")))
 			return (-1);
-		//ft_char2dump(tmp);
 		i = -1;
 		while (tmp[++i])
-		{
 			*(env->coords[(y * nb_words) + i]) = ft_atoi(tmp[i]);
-			//ft_printf("%d\n", );
-		}
 		y++;
 		ft_free2((void**)tmp);
 		lst = lst->next;
@@ -82,14 +65,19 @@ int			extract_coords(t_env *env, t_list *lst, int nb_words)
 	return (0);
 }
 
-void	ff(int **tab)
+void		set_net(t_env *env)
 {
-	int		i;
-
-	i = -1;
-	while (tab[++i])
+	if (env->nb_col >= env->nb_lign)
 	{
-		ft_printf("%d\n", *tab[i]);
+		env->net_size = (WIDTH - (env->base_width * 2)) / (env->nb_col - 1);
+		if (env->nb_col != env->nb_lign)
+			env->base_height += ((env->nb_col - env->nb_lign) / 2) * env->net_size;
+	}
+	else
+	{
+		env->net_size = (HEIGHT - (env->base_height * 2)) / (env->nb_lign - 1);
+		if (env->nb_col != env->nb_lign)
+			env->base_width += ((env->nb_lign - env->nb_col) / 2) * env->net_size;
 	}
 }
 
@@ -119,9 +107,10 @@ int			get_coords(t_env *env)
 		ft_lstpushback(&tmp, ft_strdup(line), 0);
 		ft_strdel(&line);
 	}
-	//ft_lstdump(&tmp);
 	ft_strdel(&line);
+	env->nb_col = nb_words;
+	env->nb_lign = ft_lstsize(tmp);
+	set_net(env);
 	extract_coords(env, tmp, nb_words);
-	ft_int22dump(env->coords, nb_words, 50);
 	return (1);
 }
