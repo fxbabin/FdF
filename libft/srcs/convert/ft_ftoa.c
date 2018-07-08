@@ -6,64 +6,85 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 21:28:56 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/16 01:14:24 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/08 22:49:16 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.h"
+#include "mem.h"
 #include "str.h"
 
-static char		*ft_zeros(double nb, int prec)
+int		ft_llcount(long long nb)
 {
-	char	*str;
 	int		i;
-	int		x;
 
-	i = -1;
-	x = 0;
-	if (!(str = ft_strnew(prec)))
-		return (NULL);
-	while (nb <= 0.1)
+	if (nb == 0)
+		return (1);
+	i = (nb < 0) ? 1 : 0;
+	while (nb)
 	{
-		str[++i] = '0';
-		nb *= 10;
-		x++;
+		nb /= 10;
+		i++;
 	}
-	while (prec - x)
+	return (i);
+}
+
+static void		null_decimal(char **str, int prec)
+{
+	size_t		len;
+
+	if (!str || !*str)
+		return ;
+	len = ft_strlen(*str);
+	while (prec--)
+		ft_strcpy(*str + len++, "0");
+}
+
+static void		precision_handler(char **str, double nb, int prec)
+{
+	char		*tmp;
+
+	while (prec--)
 	{
 		nb *= 10;
-		str[++i] = (int)nb + 48;
-		nb -= (int)nb;
-		prec--;
-		if (!(prec - x) && (int)(nb * 10) >= 5)
-			str[i]++;
+		if (!prec && (long long)((nb - (long long)nb) * 10) >= 5
+			&& (long long)((nb - (long long)nb) * 10) != 9)
+			nb += 1;
+		ft_strcat(*str, tmp = ft_lltoa(nb));
+		ft_strdel(&tmp);
+		nb -= (long)nb;
 	}
-	return (str);
+	/*if (!prec && (long long)((nb - (long long)nb) * 10) >= 5
+			&& (long long)((nb - (long long)nb) * 10) != 9)
+		nb += 1;
+	ft_strcat(*str, tmp = ft_lltoa(nb));
+	ft_strdel(&tmp);*/
 }
 
 char			*ft_ftoa(double nb, int prec)
 {
 	char		*str;
-	double		dec;
-	double		add;
-	int			tmp;
+	char		*tmp;
+	size_t		len;
 
-	if (!(str = ft_strnew(0)))
+	prec = (prec < 0) ? 0 : prec;
+	len = ft_llcount(nb) + prec + 1;
+	if (!(str = (char *)ft_memalloc((len + 1) * sizeof(char))))
 		return (NULL);
-	if (prec == 0)
-		prec = 6;
-	add = 0.1;
-	tmp = prec;
-	while (tmp--)
-		add /= 10;
-	nb += (nb < 0) ? -add : add;
-	dec = nb - ((long long)nb);
-	dec *= (nb < 0) ? -1 : 1;
-	str = ft_strjoinclr(str, ft_lltoa((long long)nb), 0);
+	if (nb < 0)
+	{
+		nb = -nb;
+		str[0] = '-';
+	}
+	ft_strcat(str, tmp = ft_lltoa(nb));
+	ft_strdel(&tmp);
 	if (prec)
 	{
-		str = ft_strjoinclr(str, ".", 1);
-		str = ft_strjoinclr(str, ft_zeros(dec, prec), 0);
+		ft_strcat(str, ".");
+		if ((nb = nb - (long long)nb))
+			precision_handler(&str, nb, prec);
+		else
+			null_decimal(&str, prec);
 	}
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 16:16:51 by fbabin            #+#    #+#             */
-/*   Updated: 2018/04/17 15:39:24 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/08 16:30:13 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@
 # include "mem.h"
 # include "str.h"
 # include "utils.h"
-
+# include "ft_printf.h"
 #endif

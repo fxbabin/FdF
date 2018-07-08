@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/07 00:22:02 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/09 00:08:24 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 # define WIDTH 1380
 # define HEIGHT 1380
+# define BASE_WIDTH 400
+# define BASE_HEIGHT 400
 
 /*
  ** -------------------------------- STRUCTURES -------------------------------
@@ -42,6 +44,11 @@ typedef struct		s_env
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*mlx_img;
+	int				x_center;
+	int				y_center;
+	double			rot_x;
+	double			rot_y;
+	double			rot_z;
 	unsigned int	*img;
 }					t_env;
 

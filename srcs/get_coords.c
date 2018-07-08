@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/07 01:32:43 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/08 01:09:06 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void		set_net(t_env *env)
 		if (env->nb_col != env->nb_lign)
 			env->base_width += ((env->nb_lign - env->nb_col) / 2) * env->net_size;
 	}
+	env->x_center = env->base_width + ((env->net_size * env->nb_col) / 2);
+	env->y_center = env->base_height + ((env->net_size * env->nb_lign) / 2);
 }
 
 int			get_coords(t_env *env)
