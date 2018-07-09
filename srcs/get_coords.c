@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/08 01:09:06 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/09 18:33:39 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int			extract_coords(t_env *env, t_list *lst, int nb_words)
 	y = 0;
 	(void)env;
 	if (!(env->coords = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
+		return (-1);
+	if (!(env->x = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
+		return (-1);
+	if (!(env->y = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
+		return (-1);
+	if (!(env->z = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
 		return (-1);
 	while (lst)
 	{

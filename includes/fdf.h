@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/09 00:08:24 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/09 22:33:50 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,23 @@
  ** -------------------------------- STRUCTURES -------------------------------
  */
 
+typedef struct		s_coord
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_coord;
+
 typedef struct		s_env
 {
 	int				**coords;
+	int				**x;
+	int				**y;
+	int				**z;
 	int				fd;
 	int				base_width;
 	int				base_height;
+	int				base_z;
 	int				net_size;
 	int				nb_col;
 	int				nb_lign;
@@ -52,13 +63,6 @@ typedef struct		s_env
 	unsigned int	*img;
 }					t_env;
 
-typedef struct		s_dot
-{
-	int				x;
-	int				y;
-	struct s_dot	*next;
-}					t_dot;
-
 /*
  ** ----------------------------------------------------------------------------
  ** ---------------------------------- SOURCES ---------------------------------
@@ -67,6 +71,8 @@ typedef struct		s_dot
 
 int				get_coords(t_env *env);
 void			ft_int22dump(int **array, int perline, int max);
-void			plotLine(t_env *env, int x0, int y0, int x1, int y1);
+void			plotLine(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1);
+void			bresenham(t_env *env, int x0, int y0, int x1, int y1);
+void            set_color(t_env *env, int x, int y, int z);
 
 #endif
