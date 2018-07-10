@@ -6,12 +6,16 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:43:34 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/09 22:53:42 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:00:51 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int		ft_min(int nb1, int nb2)
+{
+	return (nb1 > nb2 ? nb1 : nb2);
+}
 static void		plotLineLow(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1)
 {
 	double		dx;
@@ -32,10 +36,10 @@ static void		plotLineLow(t_env *env, int x0, int y0, int z0, int x1, int y1, int
 	D = 2 * dy - dx;
 	y = y0;
 	x = x0;
-	(void)z1;
+	//(void)z1;
 	while (++x < x1)
 	{
-		set_color(env, x, y, (z0 > z1) ? z0: z1);
+		set_color(env, x, y, ft_max(z0, z1));
 		//env->img[y * WIDTH + x] = 0xFFFFFF;
 		if (D > 0)
 		{
@@ -66,10 +70,10 @@ void	plotLineHigh(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1)
 	D = 2 * dx - dy;
 	y = y0;
 	x = x0;
-	(void)z1;
+	//(void)z1;
 	while (++y < y1)
 	{
-		set_color(env, x, y, (z0 > z1) ? z0: z1);
+		set_color(env, x, y, ft_max(z0, z1));
 		//env->img[y * WIDTH + x] = 0xFFFFFF;
 		if (D > 0)
 		{

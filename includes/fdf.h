@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/09 22:33:50 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/11 00:45:36 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,26 @@
 # include "io.h"
 # include "lst.h"
 # include "array.h"
+# include "math.h"
 
 # define WIDTH 1380
 # define HEIGHT 1380
 # define BASE_WIDTH 400
 # define BASE_HEIGHT 400
+
+# define K_EXIT 53
+# define K_4 86
+# define K_5 87
+# define K_6 88
+# define K_7 89
+# define K_8 91
+# define K_9 92
+# define K_ARROW_UP 123
+# define K_ARROW_DOWN 124
+# define K_ARROW_LEFT 126
+# define K_ARROW_RIGHT 125
+# define K_ARROW_MINUS 78
+# define K_ARROW_PLUS 69
 
 /*
  ** -------------------------------- STRUCTURES -------------------------------
@@ -38,6 +53,25 @@ typedef struct		s_coord
 	double			y;
 	double			z;
 }					t_coord;
+
+typedef struct		s_bres
+{
+	int				dx;
+	int				dy;
+	float			m;
+	int				adjust;
+	float			offset;
+	float			threshold;
+	float			delta;
+	int				x;
+	int				y;
+	int				x1;
+	int				x2;
+	int				y1;
+	int				y2;
+	int				z1;
+	int				z2;
+}					t_bres;
 
 typedef struct		s_env
 {
@@ -72,7 +106,11 @@ typedef struct		s_env
 int				get_coords(t_env *env);
 void			ft_int22dump(int **array, int perline, int max);
 void			plotLine(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1);
-void			bresenham(t_env *env, int x0, int y0, int x1, int y1);
+void			bresenham(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1);
 void            set_color(t_env *env, int x, int y, int z);
+
+int				deal_key(int key, void *param);
+void			display_grid(t_env *env);
+void			rotate(t_env *env, int x, int y, int z, int i);
 
 #endif
