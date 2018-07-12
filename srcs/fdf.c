@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/11 00:56:22 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/12 18:23:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_env	*init_env()
 	endian = 1;
 	if (!(env = (t_env*)ft_memalloc(sizeof(t_env))))
 		return (0);
-//if (!(env->dots = (t_coord**)ft_memalloc(sizeof(t_coord*))))
-	//	return (0);
 	env->base_width = BASE_WIDTH;
 	env->base_height = BASE_HEIGHT;
 	env->rot_x = 1.0;
@@ -62,10 +60,7 @@ int		main(int argc, char **argv)
 		return (-1);
 	if (!get_coords(env))
 		return (-1);
-	//env->rot_x = 0.0;
-	//ft_printf("%d\n", env->net_size);
 	mlx_key_hook(env->win_ptr, deal_key, env);
-	//env->img[100] = 0xFFFFFF;
 	display_grid(env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->mlx_img, 0, 0);
 	mlx_loop(env->mlx_ptr);

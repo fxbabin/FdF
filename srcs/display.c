@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:51:47 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/11 00:19:10 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/12 18:23:02 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void		disp(t_env *env)
 
 void    display_grid(t_env *env)
 {
-	int             i;
-	double  x;
-	double  y;
-	int             lign;
+	int			i;
+	double		x;
+	double		y;
+	int			lign;
 
 	i = -1;
 	lign = 1;
@@ -57,14 +57,7 @@ void    display_grid(t_env *env)
 	y = env->base_height;
 	while (env->coords[++i + 1])
 	{
-		//ft_printf("%d\n", *(env->coords[i]));
-		//rotate_x(env, x, y, *(env->coords[i]));
 		rotate(env, x, y, *(env->coords[i]), i);
-		//rotate_y(env, x, y, *(env->coords[i]));
-		//env->img[(int)(y * WIDTH + x)] = 0xFFFFFF;
-		//set_color(env, *(env->coords[i]), x , y);
-		//env->img[y * WIDTH + x] = 0xFFFFFF;
-
 		if (((i + 1) % env->nb_col) == 0)
 		{
 			//if (lign  < env->nb_lign)
