@@ -6,13 +6,13 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 18:23:33 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/12 21:44:01 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_env	*init_env()
+t_env	*init_env(void)
 {
 	t_env	*env;
 	int		bpp;
@@ -33,8 +33,9 @@ t_env	*init_env()
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, WIDTH, HEIGHT,
 			"FDF 42 FBABIN");
-	env->mlx_img = mlx_new_image(env->mlx_ptr, WIDTH, HEIGHT); 
-	env->img = (unsigned int*)mlx_get_data_addr(env->mlx_img, &(bpp), &(size_line), &(endian));
+	env->mlx_img = mlx_new_image(env->mlx_ptr, WIDTH, HEIGHT);
+	env->img = (unsigned int*)mlx_get_data_addr(env->mlx_img, &(bpp),
+			&(size_line), &(endian));
 	return (env);
 }
 

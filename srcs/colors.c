@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:48:35 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/10 23:50:23 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/12 21:43:01 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@ void			set_color(t_env *env, int x, int y, int z)
 
 	if ((int)(y * WIDTH + x) < 0 || (int)(y * WIDTH + x) > (WIDTH * HEIGHT))
 		return ;
-	/*if (z != 0)
-	{
-		tmp += env->base_z;
-		if ((z < 0 && tmp > 0) || (z > 0 && tmp < 0))
-			z = 0;
-	}
-	if (z != 0)
-	{
-		z += (z < 0) ? -(env->base_z) : env->base_z;
-	}*/
 	tmp = z * env->base_z;
 	if ((z > 0 && tmp < 0) || (z < 0 && tmp > 0))
 		z = 0;

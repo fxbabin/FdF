@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:54:02 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 18:04:11 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/12 21:42:21 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		display_changes(t_env *env)
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->mlx_img, 0, 0);
 }
 
-int		deal_key_2(t_env *env, int key)
+int			deal_key_2(t_env *env, int key)
 {
 	if (key == K_ARROW_UP && (env->base_width -= 10))
 		display_changes(env);
