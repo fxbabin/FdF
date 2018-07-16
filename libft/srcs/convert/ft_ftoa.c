@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 21:28:56 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/08 22:49:16 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/16 22:28:26 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mem.h"
 #include "str.h"
 
-int		ft_llcount(long long nb)
+static int		ft_llcount(long long nb)
 {
 	int		i;
 
@@ -54,11 +54,6 @@ static void		precision_handler(char **str, double nb, int prec)
 		ft_strdel(&tmp);
 		nb -= (long)nb;
 	}
-	/*if (!prec && (long long)((nb - (long long)nb) * 10) >= 5
-			&& (long long)((nb - (long long)nb) * 10) != 9)
-		nb += 1;
-	ft_strcat(*str, tmp = ft_lltoa(nb));
-	ft_strdel(&tmp);*/
 }
 
 char			*ft_ftoa(double nb, int prec)

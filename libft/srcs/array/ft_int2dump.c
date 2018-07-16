@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 21:30:41 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/04 19:51:59 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/16 22:32:06 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 #include "utils.h"
 #include "ft_printf.h"
 
-/*int       tsize(int **array)
- * {
- *  int     i;
- *      i = 0;
- *          while (array[i++])
- *                  ;
- *                      return (i);
- *                      }*/
-
-void    ft_dispfirst(int width, int nb_perline, int max)
+void			ft_dispfirst(int width, int nb_perline, int max)
 {
-	int     i;
+	int		i;
 
 	i = -1;
 	ft_printf("%-*c| ", width - 1, ' ');
@@ -41,16 +32,17 @@ void    ft_dispfirst(int width, int nb_perline, int max)
 			ft_printf("%-*d", width, i);
 	}
 	ft_printf("%k\n", RESET);
-	i = width * (((nb_perline > (max * 2) + 2)) ? (max * 2) + 2 : nb_perline + 1);
+	i = width * (((nb_perline > (max * 2) + 2))
+			? (max * 2) + 2 : nb_perline + 1);
 	ft_printf("%k", RESET);
 	while (i--)
 		ft_printf("-");
 	ft_printf("\n");
 }
 
-static int      ft_count(int nb)
+static int		ft_count(int nb)
 {
-	int             i;
+	int		i;
 
 	if (nb == 0)
 		return (1);
@@ -63,11 +55,11 @@ static int      ft_count(int nb)
 	return (i);
 }
 
-int     get_maxwidth(int **array, int nb_perline)
+static int		get_maxwidth(int **array, int nb_perline)
 {
-	int     max;
-	int     t;
-	int     i;
+	int		max;
+	int		t;
+	int		i;
 
 	t = ft_tabsize((void**)array);
 	max = ft_count(nb_perline);
@@ -81,11 +73,11 @@ int     get_maxwidth(int **array, int nb_perline)
 	return (max + 2);
 }
 
-void    disp_line(int ** array, int curr_line, int nb_perline, int max)
+static void		disp_line(int **array, int curr_line, int nb_perline, int max)
 {
-	int     i;
-	int     m;
-	int     width;
+	int		i;
+	int		m;
+	int		width;
 
 	width = get_maxwidth(array, nb_perline);
 	i = (curr_line * nb_perline) - 1;
@@ -95,9 +87,7 @@ void    disp_line(int ** array, int curr_line, int nb_perline, int max)
 		if (i % nb_perline > max - 1 && i % nb_perline < nb_perline - max)
 		{
 			if (i % nb_perline == max)
-			{
 				ft_printf("%-*s", width, "...");
-			}
 		}
 		else
 			ft_printf("%-*d", width, *array[i]);
@@ -105,11 +95,11 @@ void    disp_line(int ** array, int curr_line, int nb_perline, int max)
 	ft_printf("\n");
 }
 
-void    ft_int2dump(int **array, int nb_perline, int max)
+void			ft_int2dump(int **array, int nb_perline, int max)
 {
-	int     curr_line;
-	int     max_line;
-	int     width;
+	int		curr_line;
+	int		max_line;
+	int		width;
 
 	curr_line = 0;
 	width = get_maxwidth(array, nb_perline);
@@ -121,7 +111,8 @@ void    ft_int2dump(int **array, int nb_perline, int max)
 	{
 		if (curr_line == max && max <= max_line / 2)
 		{
-			ft_printf("%-*s| %*s\n", width - 1, "...", (width) * (max + 1) - 2, "...");
+			ft_printf("%-*s| %*s\n", width - 1, "...",
+				(width) * (max + 1) - 2, "...");
 			curr_line += max_line - (2 * max);
 		}
 		ft_printf("%+k%-*d%k| ", LBLUE, width - 1, curr_line, RESET);
