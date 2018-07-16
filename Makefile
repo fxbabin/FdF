@@ -6,14 +6,14 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 22:51:42 by fbabin            #+#    #+#              #
-#    Updated: 2018/07/10 23:59:02 by fbabin           ###   ########.fr        #
+#    Updated: 2018/07/12 23:06:56 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FDF				=	fdf
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS			=	-Wall -Werror -Wextra -g3
 
 _SRCS			=	fdf.c get_coords.c bresenham.c colors.c \
 					deal_keys.c display.c rotations.c \

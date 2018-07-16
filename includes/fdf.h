@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/11 00:45:36 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/16 17:56:10 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@
 /*
  ** -------------------------------- STRUCTURES -------------------------------
  */
+typedef struct		s_dot
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_dot;
+
 
 typedef struct		s_coord
 {
@@ -111,6 +118,7 @@ void            set_color(t_env *env, int x, int y, int z);
 
 int				deal_key(int key, void *param);
 void			display_grid(t_env *env);
-void			rotate(t_env *env, int x, int y, int z, int i);
+//void			rotate(t_env *env, int x, int y, int z, int i);
+void			rotate(t_env *env, t_dot *d, int i);
 
 #endif
