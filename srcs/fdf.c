@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 21:38:51 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 22:13:53 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		check_file_opening(t_env *env, int argc, char **argv)
 	env->fd = open(argv[1], O_RDONLY);
 	if (env->fd == -1)
 	{
-		ft_printf("%+kError :%kopen() failed%k\n", LRED, EOC, RESET);
+		ft_printf("%+kError :%k open() failed%k\n", LRED, EOC, RESET);
 		return (0);
 	}
 	return (1);
@@ -71,7 +71,10 @@ int		main(int argc, char **argv)
 	t_env		*env;
 
 	if (argc < 2)
+	{
+		ft_printf("%+kError :%k no input file given%k\n", LRED, EOC, RESET);
 		return (0);
+	}
 	env = init_env();
 	if (!env || !check_file_opening(env, argc, argv))
 		return (-1);
