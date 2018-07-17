@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:54:02 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 21:42:21 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 02:23:11 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void		display_changes(t_env *env)
 {
 	ft_printf("x : %f y: %f z: %f\n", env->rot_x, env->rot_y, env->rot_z);
 	ft_bzero(env->img, WIDTH * HEIGHT * 4);
-	display_grid(env);
+	if (env->weird)
+		weird_display_grid(env);
+	else
+		display_grid(env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->mlx_img, 0, 0);
 }
 
@@ -34,6 +37,11 @@ int			deal_key_2(t_env *env, int key)
 		display_changes(env);
 	if (key == K_ARROW_PLUS && (env->base_z += 1))
 		display_changes(env);
+	if (key == K_W)
+	{
+		env->weird = (env->weird == 1) ? 0 : 1;
+		display_changes(env);
+	}
 	return (0);
 }
 

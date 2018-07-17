@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 21:44:01 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 02:20:30 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_env	*init_env(void)
 	env->rot_y = 0.7;
 	env->rot_z = -0.4;
 	env->base_z = 1;
+	env->weird = 0;
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, WIDTH, HEIGHT,
 			"FDF 42 FBABIN");
@@ -56,13 +57,18 @@ int		main(int argc, char **argv)
 {
 	t_env		*env;
 
+	if (argc < 2)
+		return (0);
 	env = init_env();
 	if (!env || !check_file_opening(env, argc, argv))
 		return (-1);
 	if (!get_coords(env))
 		return (-1);
 	mlx_key_hook(env->win_ptr, deal_key, env);
-	display_grid(env);
+	if (env->weird)
+		weird_display_grid(env);
+	else
+		display_grid(env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->mlx_img, 0, 0);
 	mlx_loop(env->mlx_ptr);
 	return (0);

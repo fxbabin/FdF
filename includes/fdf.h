@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 01:58:14 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 02:10:01 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define K_7 89
 # define K_8 91
 # define K_9 92
+# define K_W 13
 # define K_ARROW_UP 123
 # define K_ARROW_DOWN 124
 # define K_ARROW_LEFT 126
@@ -102,6 +103,7 @@ typedef struct		s_env
 	double			rot_y;
 	double			rot_z;
 	unsigned int	*img;
+	int				weird;
 }					t_env;
 
 /*
