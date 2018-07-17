@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 02:20:30 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 19:31:19 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ int		check_file_opening(t_env *env, int argc, char **argv)
 		return (0);
 	}
 	return (1);
+}
+
+void	free_env(t_env *env)
+{
+	free(env->mlx_ptr);
+	free(env->win_ptr);
+	free(env->mlx_img);
+	free(env->img);
+	ft_free2((void**)env->coords);
+	ft_free2((void**)env->x);
+	ft_free2((void**)env->y);
+	ft_free2((void**)env->z);
+	free(env);
 }
 
 int		main(int argc, char **argv)
