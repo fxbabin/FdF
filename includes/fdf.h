@@ -6,16 +6,16 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/16 17:56:10 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 01:58:14 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDH_H
-# define FDH_H
+#ifndef FDF_H
+# define FDF_H
 
 /*
- ** --------------------------------- INCLUDES -------------------------------
- */
+** --------------------------------- INCLUDES -------------------------------
+*/
 
 # include "mlx.h"
 # include "ft_printf.h"
@@ -44,15 +44,15 @@
 # define K_ARROW_PLUS 69
 
 /*
- ** -------------------------------- STRUCTURES -------------------------------
- */
+** -------------------------------- STRUCTURES -------------------------------
+*/
+
 typedef struct		s_dot
 {
 	int				x;
 	int				y;
 	int				z;
 }					t_dot;
-
 
 typedef struct		s_coord
 {
@@ -105,20 +105,21 @@ typedef struct		s_env
 }					t_env;
 
 /*
- ** ----------------------------------------------------------------------------
- ** ---------------------------------- SOURCES ---------------------------------
- ** ----------------------------------------------------------------------------
- */
+** ----------------------------------------------------------------------------
+** ---------------------------------- SOURCES ---------------------------------
+** ----------------------------------------------------------------------------
+*/
 
-int				get_coords(t_env *env);
-void			ft_int22dump(int **array, int perline, int max);
-void			plotLine(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1);
-void			bresenham(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1);
-void            set_color(t_env *env, int x, int y, int z);
-
-int				deal_key(int key, void *param);
-void			display_grid(t_env *env);
-//void			rotate(t_env *env, int x, int y, int z, int i);
-void			rotate(t_env *env, t_dot *d, int i);
+int					get_coords(t_env *env);
+void				ft_int22dump(int **array, int perline, int max);
+void				bresenham(t_env *env, t_dot *d0, t_dot *d1);
+void				set_color(t_env *env, int x, int y, int z);
+int					deal_key(int key, void *param);
+void				display_grid(t_env *env);
+void				weird_display_grid(t_env *env);
+void				rotate(t_env *env, t_dot *d, int i);
+void				weird_rotate(t_env *env, t_dot *d, int i);
+int					ft_max(int nb1, int nb2);
+double				ft_absdouble(double nb);
 
 #endif

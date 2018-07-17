@@ -6,30 +6,20 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:52:44 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/10 17:03:12 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 01:51:29 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		ft_max(int nb1, int nb2)
+void		init_bresenham(t_bres *b, t_dot *d0, t_dot *d1)
 {
-		return (nb1 > nb2 ? nb1 : nb2);
-}
-
-double		ft_absdouble(double nb)
-{
-	return ((nb < 0.0) ? -nb : nb);
-}
-
-void		init_bresenham(t_bres *b, int x0, int y0, int z0, int x1, int y1, int z1)
-{
-	b->x1 = x0;
-	b->x2 = x1;
-	b->y1 = y0;
-	b->y2 = y1;
-	b->z1 = z0;
-	b->z2 = z1;
+	b->x1 = d0->x;
+	b->x2 = d1->x;
+	b->y1 = d0->y;
+	b->y2 = d1->y;
+	b->z1 = d0->z;
+	b->z2 = d1->z;
 	b->dx = b->x2 - b->x1;
 	b->dy = b->y2 - b->y1;
 }
@@ -47,8 +37,6 @@ void		bresenham_2(t_env *env, t_bres *b)
 	while (++b->y <= b->y2)
 	{
 		set_color(env, b->x, b->y, ft_max(b->z1, b->z2));
-		//env->img[b->y * WIDTH + b->x] = 0xFFFFFF;
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b->x, b->y, 0xFFFFFF);
 		b->offset += b->delta;
 		if (b->offset >= b->threshold)
 		{
@@ -71,8 +59,6 @@ void		bresenham_1(t_env *env, t_bres *b)
 	while (++(b->x) <= b->x2)
 	{
 		set_color(env, b->x, b->y, ft_max(b->z1, b->z2));
-		//env->img[b->y * WIDTH + b->x] = 0xFFFFFF;
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b->x, b->y, 0xFFFFFF);
 		b->offset += b->delta;
 		if (b->offset >= b->threshold)
 		{
@@ -82,20 +68,18 @@ void		bresenham_1(t_env *env, t_bres *b)
 	}
 }
 
-void		bresenham(t_env *env, int x0, int y0, int z0, int x1, int y1, int z1)
+void		bresenham(t_env *env, t_dot *d0, t_dot *d1)
 {
 	t_bres			b;
 
-	init_bresenham(&b, x0, y0, z0, x1, y1, z1);
+	init_bresenham(&b, d0, d1);
 	if (b.dx == 0)
 	{
 		if (b.y2 < b.y1)
 			ft_swap(&b.y2, &b.y1);
 		b.y = b.y1 - 1;
 		while (++(b.y) <= b.y2)
-			set_color(env, b.x1, b.y, ft_max(z0, z1));
-			//env->img[b.y * WIDTH + b.x1] = 0xFFFFFF;
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.x1, b.y, 0xFFFFFF);
+			set_color(env, b.x1, b.y, ft_max(d0->z, d1->z));
 	}
 	else
 	{

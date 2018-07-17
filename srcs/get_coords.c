@@ -6,24 +6,11 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 21:38:15 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 01:19:43 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int				ft_is_word_nb(char *str)
-{
-	int		i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (!ft_charinset(str[i], "0123456789"))
-			return (0);
-	}
-	return (1);
-}
 
 static int		ft_wordnb(char *str, char *charset)
 {

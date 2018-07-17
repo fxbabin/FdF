@@ -6,16 +6,40 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:51:47 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/16 22:26:19 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 01:52:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int			set_1(t_env *env, t_dot *d0, t_dot *d1, int i)
+{
+	d0->x = *(env->x[i]);
+	d0->y = *(env->y[i]);
+	d0->z = *(env->coords[i]);
+	d1->x = *(env->x[i + env->nb_col]);
+	d1->y = *(env->y[i + env->nb_col]);
+	d1->z = *(env->coords[i + env->nb_col]);
+	return (1);
+}
+
+int			set_2(t_env *env, t_dot *d0, t_dot *d1, int i)
+{
+	d0->x = *(env->x[i]);
+	d0->y = *(env->y[i]);
+	d0->z = *(env->coords[i]);
+	d1->x = *(env->x[i + 1]);
+	d1->y = *(env->y[i + 1]);
+	d1->z = *(env->coords[i + 1]);
+	return (1);
+}
+
 void		disp(t_env *env)
 {
 	int		i;
 	int		lign;
+	t_dot	d0;
+	t_dot	d1;
 
 	i = -1;
 	lign = 1;
@@ -23,20 +47,16 @@ void		disp(t_env *env)
 	{
 		if (((i + 1) % env->nb_col) == 0)
 		{
-			if (lign < env->nb_lign)
-				bresenham(env, *(env->x[i]), *(env->y[i]), *(env->coords[i]),
-						*(env->x[i + env->nb_col]), *(env->y[i + env->nb_col]),
-						*(env->coords[i + env->nb_col]));
+			if (lign < env->nb_lign && set_1(env, &d0, &d1, i))
+				bresenham(env, &d0, &d1);
 			lign++;
 		}
 		else
 		{
-			bresenham(env, *(env->x[i]), *(env->y[i]), *(env->coords[i]),
-					*(env->x[i + 1]), *(env->y[i + 1]), *(env->coords[i + 1]));
-			if (lign < env->nb_lign)
-				bresenham(env, *(env->x[i]), *(env->y[i]), *(env->coords[i]),
-					*(env->x[i + env->nb_col]), *(env->y[i + env->nb_col]),
-					*(env->coords[i + env->nb_col]));
+			set_2(env, &d0, &d1, i);
+			bresenham(env, &d0, &d1);
+			if (lign < env->nb_lign && set_1(env, &d0, &d1, i))
+				bresenham(env, &d0, &d1);
 		}
 	}
 }
@@ -69,7 +89,7 @@ void		display_grid(t_env *env)
 
 void		weird_display_grid(t_env *env)
 {
-	t_coord		d;
+	t_dot		d;
 	int			i;
 	int			lign;
 
@@ -88,9 +108,7 @@ void		weird_display_grid(t_env *env)
 			lign++;
 		}
 		else
-		{
 			d.x += env->net_size;
-		}
 	}
 	disp(env);
 }
