@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 22:05:49 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 22:59:35 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ void			extract_coords(t_env *env, t_list *lst, int nb_words)
 	l = lst;
 	y = 0;
 	if (!(env->coords = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
-		return ;
+		ft_error();
 	if (!(env->x = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
-		return ;
+		ft_error();
 	if (!(env->y = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
-		return ;
+		ft_error();
 	if (!(env->z = ft_int2alloc(ft_lstsize(lst) * nb_words + 1, 1)))
-		return ;
+		ft_error();
 	while (lst && (i = -1))
 	{
 		if (!(tmp = ft_split(lst->content, " \t")))
-			return ;
+			ft_error();
 		while (tmp[++i])
 			*(env->coords[(y * nb_words) + i]) = ft_atoi(tmp[i]);
 		y++;
@@ -106,7 +106,7 @@ int				get_coords(t_env *env)
 		if (ft_wordnb(line, " \t") != nb_words)
 		{
 			ft_strdel(&line);
-			ft_printf("%+kError :%k invalid map format%k\n", LRED, EOC, RESET);
+			ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
 			return (0);
 		}
 		ft_lstpushback(&tmp, ft_strdup(line), 0);

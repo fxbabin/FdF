@@ -6,11 +6,25 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 22:13:53 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 23:05:08 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	init_env_2(t_env *env, int bpp, int size_line, int endian)
+{
+	if (!(env->mlx_ptr = mlx_init()))
+		ft_error();
+	if (!(env->win_ptr = mlx_new_window(env->mlx_ptr, WIDTH, HEIGHT,
+			"FDF 42 FBABIN")))
+		ft_error();
+	if (!(env->mlx_img = mlx_new_image(env->mlx_ptr, WIDTH, HEIGHT)))
+		ft_error();
+	if (!(env->img = (unsigned int*)mlx_get_data_addr(env->mlx_img, &(bpp),
+			&(size_line), &(endian))))
+		ft_error();
+}
 
 t_env	*init_env(void)
 {
@@ -23,7 +37,7 @@ t_env	*init_env(void)
 	size_line = WIDTH * 4;
 	endian = 1;
 	if (!(env = (t_env*)ft_memalloc(sizeof(t_env))))
-		return (0);
+		ft_error();
 	env->base_width = BASE_WIDTH;
 	env->base_height = BASE_HEIGHT;
 	env->rot_x = 1.0;
@@ -31,12 +45,7 @@ t_env	*init_env(void)
 	env->rot_z = -0.4;
 	env->base_z = 1;
 	env->weird = 0;
-	env->mlx_ptr = mlx_init();
-	env->win_ptr = mlx_new_window(env->mlx_ptr, WIDTH, HEIGHT,
-			"FDF 42 FBABIN");
-	env->mlx_img = mlx_new_image(env->mlx_ptr, WIDTH, HEIGHT);
-	env->img = (unsigned int*)mlx_get_data_addr(env->mlx_img, &(bpp),
-			&(size_line), &(endian));
+	init_env_2(env, bpp, size_line, endian);
 	return (env);
 }
 
@@ -47,23 +56,10 @@ int		check_file_opening(t_env *env, int argc, char **argv)
 	env->fd = open(argv[1], O_RDONLY);
 	if (env->fd == -1)
 	{
-		ft_printf("%+kError :%k open() failed%k\n", LRED, EOC, RESET);
+		ft_dprintf(2, "%+kError :%k open() failed%k\n", LRED, EOC, RESET);
 		return (0);
 	}
 	return (1);
-}
-
-void	free_env(t_env *env)
-{
-	free(env->mlx_ptr);
-	free(env->win_ptr);
-	free(env->mlx_img);
-	free(env->img);
-	ft_free2((void**)env->coords);
-	ft_free2((void**)env->x);
-	ft_free2((void**)env->y);
-	ft_free2((void**)env->z);
-	free(env);
 }
 
 int		main(int argc, char **argv)
@@ -72,14 +68,18 @@ int		main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		ft_printf("%+kError :%k no input file given%k\n", LRED, EOC, RESET);
+		ft_dprintf(2, "%+kError :%k no input file given%k\n", LRED, EOC, RESET);
 		return (0);
 	}
-	env = init_env();
+	if (!(env = init_env()))
+		return (-1);
 	if (!env || !check_file_opening(env, argc, argv))
 		return (-1);
 	if (!get_coords(env))
 		return (-1);
+	if ((close(env->fd)) == -1)
+		exit(ft_dprintf(2, "%+kError :%k close() failed%k\n", LRED,
+			EOC, RESET));
 	mlx_hook(env->win_ptr, 2, 1L << 0, deal_key, env);
 	if (env->weird)
 		weird_display_grid(env);

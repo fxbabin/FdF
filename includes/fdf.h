@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:59:18 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 02:10:01 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 23:03:20 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ void				rotate(t_env *env, t_dot *d, int i);
 void				weird_rotate(t_env *env, t_dot *d, int i);
 int					ft_max(int nb1, int nb2);
 double				ft_absdouble(double nb);
+void				ft_error(void);
 
 #endif
