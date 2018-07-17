@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 19:35:44 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 19:46:03 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				get_coords_2(t_env *env, t_list *tmp, int nb_words)
 	env->nb_lign = ft_lstsize(tmp);
 	set_net(env);
 	extract_coords(env, tmp, nb_words);
+	ft_int2dump(env->coords, nb_words, 10);
 	ft_lstdel(&tmp, ft_elemdel);
 	return (1);
 }

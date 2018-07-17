@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 22:59:08 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 19:31:19 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 21:38:51 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		check_file_opening(t_env *env, int argc, char **argv)
 	env->fd = open(argv[1], O_RDONLY);
 	if (env->fd == -1)
 	{
-		ft_printf("open() failed\n");
+		ft_printf("%+kError :%kopen() failed%k\n", LRED, EOC, RESET);
 		return (0);
 	}
 	return (1);
@@ -77,7 +77,7 @@ int		main(int argc, char **argv)
 		return (-1);
 	if (!get_coords(env))
 		return (-1);
-	mlx_key_hook(env->win_ptr, deal_key, env);
+	mlx_hook(env->win_ptr, 2, 1L << 0, deal_key, env);
 	if (env->weird)
 		weird_display_grid(env);
 	else

@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:54:02 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 19:35:25 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 21:40:04 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void		display_changes(t_env *env)
 {
-	ft_printf("x : %f y: %f z: %f\n", env->rot_x, env->rot_y, env->rot_z);
+	ft_printf("%+kx : %f %ky: %f %kz: %f\n", LRED, env->rot_x,
+		LGREEN, env->rot_y, LBLUE, env->rot_z);
 	ft_bzero(env->img, WIDTH * HEIGHT * 4);
 	if (env->weird)
 		weird_display_grid(env);
@@ -52,7 +53,7 @@ int			deal_key(int key, void *param)
 	env = (t_env*)param;
 	if (key == K_EXIT)
 	{
-		ft_printf("EXIT VISUALISOR\n");
+		ft_printf("%kEXIT VISUALISOR\n", LCYAN);
 		exit(0);
 	}
 	if (key == K_9 && (env->rot_z += 0.1))
