@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 19:46:03 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/17 22:05:49 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int				get_coords(t_env *env)
 		if (ft_wordnb(line, " \t") != nb_words)
 		{
 			ft_strdel(&line);
+			ft_printf("%+kError :%k invalid map format%k\n", LRED, EOC, RESET);
 			return (0);
 		}
 		ft_lstpushback(&tmp, ft_strdup(line), 0);
