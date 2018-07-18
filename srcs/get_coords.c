@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 22:59:35 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/18 20:47:58 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void			set_net(t_env *env)
 
 int				get_coords_2(t_env *env, t_list *tmp, int nb_words)
 {
+	if (nb_words <= 1)
+	{
+		ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
+		exit (-1);
+	}
 	env->nb_col = nb_words;
 	env->nb_lign = ft_lstsize(tmp);
 	set_net(env);
@@ -107,7 +112,7 @@ int				get_coords(t_env *env)
 		{
 			ft_strdel(&line);
 			ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
-			return (0);
+			exit (-1);
 		}
 		ft_lstpushback(&tmp, ft_strdup(line), 0);
 		ft_strdel(&line);

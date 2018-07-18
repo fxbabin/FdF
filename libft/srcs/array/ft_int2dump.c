@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 21:30:41 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/16 22:32:06 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/18 20:32:36 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void		disp_line(int **array, int curr_line, int nb_perline, int max)
 	width = get_maxwidth(array, nb_perline);
 	i = (curr_line * nb_perline) - 1;
 	m = i + nb_perline;
-	while (++i <= m)
+	while (++i <= m && array[i])
 	{
 		if (i % nb_perline > max - 1 && i % nb_perline < nb_perline - max)
 		{
