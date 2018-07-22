@@ -6,14 +6,14 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 22:51:42 by fbabin            #+#    #+#              #
-#    Updated: 2018/07/18 20:48:46 by fbabin           ###   ########.fr        #
+#    Updated: 2018/07/22 18:37:11 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FDF				=	fdf
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -g3
+CFLAGS			=	-Wall -Werror -Wextra
 
 _SRCS			=	fdf.c get_coords.c bresenham.c colors.c \
 					deal_keys.c display.c rotations.c utils.c \
@@ -34,16 +34,16 @@ _GREEN=\x1b[32m
 _YELLOW=\x1b[33m
 _END=\x1b[0m
 
-all: $(FDF)
+all: lib $(HEADER) $(FDF) 
 
-$(FDF): $(HEADER) $(LIBFT) $(MLX) $(OBJS)
+$(FDF): $(LIBFT) $(MLX) $(OBJS)
 		@$(CC) $(CFLAGS) -o $(FDF) $(OBJS) -I /usr/local/include -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit -L$(LIB_DIR) -lft -I $(HEADER_DIR)
 		@echo "$(FDF) : $(_GREEN)Done$(_END)"
 
 $(MLX):
 		@make -C $(MLX_DIR)
 
-$(LIBFT):
+lib:
 		@make -C $(LIB_DIR)
 
 %.o : %.c
