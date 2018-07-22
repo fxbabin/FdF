@@ -6,11 +6,36 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 22:41:31 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/22 18:57:35 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/22 21:27:08 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int		is_number(char *str)
+{
+	int		i;
+
+	i = -1;
+	if (!str || !*str)
+	{
+		ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
+		exit (-1);
+	}
+	if (str[0] == '-')
+		i++;
+	if (str[i + 1] && str[i + 1] < '0' && str[i + 1] > '9')
+		return (0);
+	while (str[++i] && str[i] != ',')
+	{
+		if (str[i] > '9' || str[i] < '0')
+		{
+			ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
+			exit (-1);
+		}
+	}
+	return (1);
+}
 
 static int		ft_wordnb(char *str, char *charset)
 {
@@ -48,7 +73,7 @@ void			extract_coords(t_env *env, t_list *lst, int nb_words)
 	{
 		if (!(tmp = ft_split(lst->content, " \t")))
 			ft_error();
-		while (tmp[++i])
+		while (tmp[++i] && is_number(tmp[i]))
 			*(env->coords[(y * nb_words) + i]) = ft_atoi(tmp[i]);
 		y++;
 		ft_free2((void**)tmp);
@@ -81,7 +106,7 @@ int				get_coords_2(t_env *env, t_list *tmp, int nb_words)
 	if (nb_words <= 1)
 	{
 		ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
-		exit (-1);
+		exit(-1);
 	}
 	env->nb_col = nb_words;
 	env->nb_lign = ft_lstsize(tmp);
@@ -111,7 +136,7 @@ int				get_coords(t_env *env)
 		{
 			ft_strdel(&line);
 			ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
-			exit (-1);
+			exit(-1);
 		}
 		ft_lstpushback(&tmp, ft_strdup(line), 0);
 		ft_strdel(&line);

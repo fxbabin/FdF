@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 23:48:35 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/12 21:43:01 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/22 21:07:10 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void			set_color(t_env *env, int x, int y, int z)
 		z = 0;
 	else
 		z = tmp;
+	if (x > WIDTH || x < 0)
+		return ;
 	if (z < 5)
 		env->img[(int)(y * WIDTH + x)] = 0x1860B6;
 	else if (z >= 5 && z < 100)
