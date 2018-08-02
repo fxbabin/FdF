@@ -6,11 +6,36 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 01:50:00 by fbabin            #+#    #+#             */
-/*   Updated: 2018/07/17 22:50:05 by fbabin           ###   ########.fr       */
+/*   Updated: 2018/07/22 21:44:49 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int		is_number(char *str)
+{
+	int		i;
+
+	i = -1;
+	if (!str || !*str)
+	{
+		ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
+		exit(-1);
+	}
+	if (str[0] == '-')
+		i++;
+	if (str[i + 1] && str[i + 1] < '0' && str[i + 1] > '9')
+		return (0);
+	while (str[++i] && str[i] != ',')
+	{
+		if (str[i] > '9' || str[i] < '0')
+		{
+			ft_dprintf(2, "%+kError :%k invalid map%k\n", LRED, EOC, RESET);
+			exit(-1);
+		}
+	}
+	return (1);
+}
 
 int		ft_max(int nb1, int nb2)
 {
