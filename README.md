@@ -26,4 +26,4 @@ A mistake during the development lead to an "artistic bonus" where the lines of 
 <img src="imgs/weird2.png" alt="drawing" width="500" />
 <p/>
 
-### Final marck (125/125)
+### Final mark (125/125)
